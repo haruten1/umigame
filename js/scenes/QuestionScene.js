@@ -473,20 +473,20 @@ export class QuestionScene {
     ctx.font = '14px "Courier New", monospace';
     ctx.textAlign = 'left';
 
-    let currentY = y;
     const lineHeight = 24;
-    const maxY = y + height - lineHeight;
+    const maxLines = Math.floor(height / lineHeight);
 
     if (this.conversationHistory.length === 0) {
       ctx.fillStyle = '#066';
-      ctx.fillText('> Awaiting advisor query...', x, currentY);
+      ctx.fillText('> Awaiting advisor query...', x, y);
       return;
     }
 
-    const displayCount = Math.min(this.conversationHistory.length, 16);
-    const startIndex = Math.max(0, this.conversationHistory.length - displayCount);
+    // 表示可能な行数分だけ最新の履歴を表示
+    const startIndex = Math.max(0, this.conversationHistory.length - maxLines);
 
-    for (let i = startIndex; i < this.conversationHistory.length && currentY < maxY; i++) {
+    let currentY = y;
+    for (let i = startIndex; i < this.conversationHistory.length; i++) {
       const msg = this.conversationHistory[i];
 
       if (msg.role === 'user') {

@@ -8,7 +8,7 @@ export const CONFIG = {
   CANVAS_HEIGHT: 720,
 
   // ゲームバランス
-  MAX_QUESTIONS: 10, // 質問可能回数
+  MAX_QUESTIONS: 20, // 質問可能回数
   VERDICT_MAX_LENGTH: 200, // 裁定の最大文字数
 
   // AI設定
