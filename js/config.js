@@ -1,7 +1,7 @@
-// API設定（後で環境変数等に移行）
+// API設定
 export const CONFIG = {
-  // Google AI Studio APIキー（開発用：後で秘匿化する）
-  GEMINI_API_KEY: "AIzaSyDoj9jqFrbF1AZZiPJcpg0YaOLqJ_vSjEM",
+  // Cloudflare Worker URL（デプロイ後に設定）
+  WORKER_URL: "https://umigame-gemini-proxy.ruirairin.workers.dev",
 
   // ゲーム設定
   CANVAS_WIDTH: 1280,
