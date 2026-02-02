@@ -70,7 +70,7 @@ ${puzzle.truth}
 /**
  * プレイヤーの推理を採点する
  */
-export async function judgeVerdict(puzzle, playerVerdict, history) {
+export async function judgeVerdict(puzzle, playerVerdict) {
   const systemPrompt = `あなたは「ウミガメのスープ」形式の推理ゲームの審判です。
 
 【事件の状況】
@@ -79,13 +79,10 @@ ${puzzle.situation}
 【真相】
 ${puzzle.truth}
 
-【プレイヤーの質問履歴】
-${history.map((h, i) => `${i + 1}. ${h.role === 'user' ? 'Q' : 'A'}: ${h.content}`).join('\n')}
-
 【プレイヤーの推理】
 ${playerVerdict}
 
-プレイヤーの推理を採点してください。
+プレイヤーの推理を採点してください。質問履歴は考慮せず、推理の内容のみで判断してください。
 
 採点基準:
 - 真相の核心（動機、トリック、因果関係）をどれだけ正確に言い当てているか

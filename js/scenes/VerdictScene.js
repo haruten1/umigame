@@ -66,8 +66,7 @@ export class VerdictScene {
     try {
       const response = await judgeVerdict(
         STORY.puzzle,
-        verdict,
-        this.conversationHistory
+        verdict
       );
       this.result = response;
     } catch (error) {
