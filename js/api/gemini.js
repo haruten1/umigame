@@ -1,30 +1,29 @@
 import { CONFIG } from '../config.js';
 
 /**
- * Gemini APIを呼び出す共通関数
+ * Cloudflare Worker経由でGemini APIを呼び出す
  */
-async function callGemini(systemPrompt, userMessages) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.AI_MODEL}:generateContent?key=${CONFIG.GEMINI_API_KEY}`;
-
+async function callGemini(systemPrompt, userMessages, maxTokens = 500) {
   // メッセージをGemini形式に変換
   const contents = userMessages.map((msg) => ({
     role: msg.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: msg.content }],
   }));
 
-  const response = await fetch(url, {
+  const response = await fetch(CONFIG.WORKER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      model: CONFIG.AI_MODEL,
       contents,
       systemInstruction: {
         parts: [{ text: systemPrompt }],
       },
       generationConfig: {
         temperature: 0.7,
-        maxOutputTokens: 500,
+        maxOutputTokens: maxTokens,
       },
     }),
   });
@@ -98,7 +97,7 @@ ${playerVerdict}
 
   const messages = [{ role: 'user', content: '採点をお願いします。' }];
 
-  const response = await callGemini(systemPrompt, messages);
+  const response = await callGemini(systemPrompt, messages, 1000);
 
   try {
     // JSONパース（コードブロックがある場合も対応）
