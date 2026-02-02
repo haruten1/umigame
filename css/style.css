@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050a0f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+}
+
+#game-container {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+}
+
+#game-canvas {
+  display: block;
+  background-color: #0a1520;
+  border: 1px solid #0ff;
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 60px rgba(0, 255, 255, 0.03);
+}
+
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#ui-layer > * {
+  pointer-events: auto;
+}
+
+/* テキスト入力用 */
+.text-input {
+  position: absolute;
+  background: rgba(5, 15, 25, 0.95);
+  border: 1px solid #0aa;
+  border-radius: 4px;
+  color: #0ff;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  padding: 12px;
+  outline: none;
+  resize: none;
+}
+
+.text-input::placeholder {
+  color: #066;
+}
+
+.text-input:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+/* ボタン */
+.game-button {
+  position: absolute;
+  background: linear-gradient(180deg, #0a2a3a, #051520);
+  border: 1px solid #0aa;
+  border-radius: 4px;
+  color: #0ff;
+  font-size: 16px;
+  font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+  padding: 12px 32px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-button:hover {
+  background: linear-gradient(180deg, #0a3a4a, #0a2030);
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.game-button:active {
+  transform: scale(0.98);
+}
+
+.game-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 問題文オーバーレイ */
+.situation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.situation-content {
+  background: rgba(5, 15, 25, 0.98);
+  border: 2px solid #0aa;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 800px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.situation-header {
+  color: #0ff;
+  font-size: 24px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid #066;
+  padding-bottom: 15px;
+}
+
+.situation-text {
+  color: #0aa;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.situation-close {
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #0a2a3a, #051520);
+  border: 1px solid #0aa;
+  border-radius: 4px;
+  color: #0ff;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  padding: 10px 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.situation-close:hover {
+  background: linear-gradient(180deg, #0a3a4a, #0a2030);
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
